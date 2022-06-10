@@ -1,0 +1,44 @@
+.custom-toast-messager {
+  color: @white;
+  width: 351px !important;
+  padding: 12px !important;
+  line-height: 1.2 !important;
+  margin-right: -8px;
+  cursor: pointer;
+  &.info {
+    background-color: @primary-color;  
+  }
+
+  &.success {
+    background-color: @success;  
+  }
+
+  &.error {
+    background-color: @error;  
+  }
+
+  &.no-internet {
+    background-color: @gray-10;  
+  }
+  
+  .ant-notification-notice-icon {
+    margin: 0;
+  }
+  
+  .ant-notification-notice-message {
+    margin: 0 0 0 40px !important;
+    padding-right: 41px !important;
+    color: @white;
+    font-weight: bold;
+    font-size: 14px !important;
+    text-align: justify;
+  }
+
+  .ant-notification-notice-close {
+    right: 16px;
+  }
+  a {
+    color: @white;
+    text-decoration: underline;
+  }
+}
