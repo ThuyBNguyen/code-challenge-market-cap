@@ -8,6 +8,17 @@ const dotEnvResult = require('dotenv').config();
 if (dotEnvResult.error) {
   throw dotEnvResult.error;
 }
+
+const COIN_RANKING_URL = dotEnvResult.parsed.COIN_RANKING_URL;
+dotEnvResult.parsed.COIN_RANKING_URL = '/v2';
+const rewrites = async () => {
+  return [
+    {
+      source: dotEnvResult.parsed.COIN_RANKING_URL + '/:path*',
+      destination: COIN_RANKING_URL + '/:path*',
+    },
+  ];
+};
 module.exports = withPlugins([
   [withAntdLess, {
     lessLoaderOptions: {
@@ -22,9 +33,10 @@ module.exports = withPlugins([
 ], {
   env: _.omit(dotEnvResult.parsed, ['NODE_ENV']),
   images: {
-    domains: ['example-domain.com'],
+    // domains: ['minnano-dev.s3.ap-northeast-1.amazonaws.com'],
   },
   webpack: (config) => {
     return config;
   },
+  rewrites,
 })

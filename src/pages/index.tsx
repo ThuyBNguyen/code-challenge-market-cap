@@ -1,7 +1,12 @@
 import React from 'react';
+import CoinsList from '@components/CoinsList';
 
 const Home: React.FunctionComponent = () => {
-  return <div>Welcome to homepage</div>;
+  return (
+    <div>
+      <CoinsList />
+    </div>
+  );
 };
 
 export default Home;

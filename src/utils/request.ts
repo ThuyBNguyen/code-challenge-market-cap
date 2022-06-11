@@ -5,15 +5,14 @@ import Helper from 'utils/helpers';
 
 const getAxiosInstance = () => {
   const headers = {
-    Authorization: '',
-    'Accept-Language': '',
+    'x-access-token': process.env.COIN_RAKING_TOKEN,
+    'Access-Control-Allow-Origin': '*',
   };
 
   const axiosInstance = axios.create({
-    baseURL: process.env.SERVER_URL,
+    baseURL: process.env.COIN_RANKING_URL,
     headers,
   });
-
   axiosInstance.interceptors.response.use(
     (response) => {
       if ([200, 201].includes(response.status)) {
