@@ -1,0 +1,109 @@
+.coin-detail {
+  .basic-info {
+    margin-top: 16px;
+    display: flex;
+    .name-rank-container {
+      width: 365px;
+      .name-container {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 36px;
+        img {
+          height: 40px;
+          width: 40px;
+          margin-right: 4px;
+        }
+        .symbol {
+          color: #58667e;
+          border-radius: 4px;
+          padding: 2px 6px;
+          background-color: #eff2f5;
+          margin-left: 6px;
+        }
+      }
+      .rank {
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 18px;
+        white-space: nowrap;
+        background-color: #808a9d;
+        color: rgb(255, 255, 255);
+        width: fit-content;
+      }
+    }
+    .price-container {
+      width: 365px;
+      .coin-name {
+        color: #58667e;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+      }
+      .price-change-container {
+        display: inline-flex;
+        align-items: center;
+        .price {
+          font-size: 32px;
+          font-weight: 700;
+          line-height: 42px;
+        }
+        .change {
+          font-size: 14px;
+          font-weight: 600;
+          padding: 5px 10px;
+          white-space: nowrap;
+          border-radius: 8px;
+          line-height: 1.5em;
+          margin-left: 6px;
+          &.decrease {
+            background-color: #ea3943;
+            color: rgb(255, 255, 255);
+          }
+          &.increase {
+            background-color: #16c784;
+            color: rgb(255, 255, 255);
+          }
+        }
+      }
+    }
+  }
+  .market-info-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+    .market-info {
+      .title {
+        color: #58667e;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+      }
+      .content {
+        color: #000;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+        margin-right: 8px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .coin-detail {
+    .basic-info {
+      display: block;
+      .name-rank-container {
+        margin-bottom: 16px;
+      }
+    }
+    .market-info-container {
+      display: inline-block;
+    }
+  }
+}

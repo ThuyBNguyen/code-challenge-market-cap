@@ -1,12 +1,12 @@
-import React from 'react';
-import CoinsList from '@components/CoinsList';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Home: React.FunctionComponent = () => {
-  return (
-    <div>
-      <CoinsList />
-    </div>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/coins');
+  });
+  return <div></div>;
 };
 
 export default Home;

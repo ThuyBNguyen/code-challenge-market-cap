@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import React from 'react';
+import Link from 'next/link';
 import _get from 'lodash/get';
 import { ColumnType } from 'antd/lib/table/interface';
 import Helper from 'utils/helpers';
@@ -32,13 +33,14 @@ Columns.name = {
   key: 'name',
   render: (_, record) => {
     return (
-      <div className="name-container">
-        <img src={_get(record, 'iconUrl', '')} />
-        <div className="name">{_get(record, 'name')}</div>
-      </div>
+      <Link href={`/coins/${encodeURIComponent(_get(record, 'uuid'))}`}>
+        <div className="name-container">
+          <img src={_get(record, 'iconUrl', '')} />
+          <div className="name">{_get(record, 'name')}</div>
+        </div>
+      </Link>
     );
   },
-  width: 400,
 };
 
 Columns.symbol = {
@@ -68,6 +70,7 @@ Columns.change = {
   dataIndex: 'change',
   key: 'change',
   sorter: true,
+  render: (change) => <div>{change}%</div>,
 };
 
 export default Columns;

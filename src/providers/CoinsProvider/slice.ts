@@ -6,6 +6,7 @@ export interface CoinsState {
   total: number;
   list: ObjectType;
   stats: { [key: string]: string };
+  detail: { [key: string]: string };
 }
 
 const initialState: CoinsState = {
@@ -13,6 +14,7 @@ const initialState: CoinsState = {
   total: 0,
   list: [],
   stats: {},
+  detail: {},
 };
 
 const CoinsState = createSlice({
@@ -35,9 +37,30 @@ const CoinsState = createSlice({
       state.isLoading = false;
       return state;
     },
+    getCoinDetailRequest(state, action) {
+      state.isLoading = true;
+      return state;
+    },
+    getCoinDetailSuccess(state, action) {
+      const { detail } = action.payload;
+      state.isLoading = false;
+      state.detail = detail.coin;
+      return state;
+    },
+    getCoinDetailFailure(state, action) {
+      state.isLoading = false;
+      return state;
+    },
   },
 });
 
-export const { getCoinsListRequest, getCoinsListSuccess, getCoinsListFailure } = CoinsState.actions;
+export const {
+  getCoinsListRequest,
+  getCoinsListSuccess,
+  getCoinsListFailure,
+  getCoinDetailRequest,
+  getCoinDetailSuccess,
+  getCoinDetailFailure,
+} = CoinsState.actions;
 
 export default CoinsState.reducer;

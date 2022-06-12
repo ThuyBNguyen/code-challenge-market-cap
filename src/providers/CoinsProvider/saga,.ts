@@ -1,8 +1,15 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery, call, takeLeading } from 'redux-saga/effects';
 import _pick from 'lodash/pick';
 import { AnyAction } from 'redux';
 import request from 'utils/request';
-import { getCoinsListRequest, getCoinsListSuccess, getCoinsListFailure } from './slice';
+import {
+  getCoinsListRequest,
+  getCoinsListSuccess,
+  getCoinsListFailure,
+  getCoinDetailRequest,
+  getCoinDetailSuccess,
+  getCoinDetailFailure,
+} from './slice';
 
 export function* getCoinsList(action: AnyAction): unknown {
   try {
@@ -15,6 +22,16 @@ export function* getCoinsList(action: AnyAction): unknown {
   }
 }
 
+export function* getCoinDetail(action: AnyAction): unknown {
+  try {
+    const { data } = yield call(request, `/coin/${action.payload.uuid}`, {}, { method: 'GET' });
+    yield put(getCoinDetailSuccess({ detail: data }));
+  } catch (error) {
+    yield put(getCoinDetailFailure({ error }));
+  }
+}
+
 export default function* coinsWatch(): Generator {
   yield takeEvery(getCoinsListRequest.type, getCoinsList);
+  yield takeLeading(getCoinDetailRequest.type, getCoinDetail);
 }

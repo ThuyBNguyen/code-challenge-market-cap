@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Columns from './Columns';
+import Layout from 'components/Layout';
+import Columns from 'components/CoinsList/Columns';
 import _get from 'lodash/get';
 import _isEqual from 'lodash/isEqual';
 import Search from 'antd/lib/input/Search';
@@ -47,39 +48,41 @@ const CoinsList = (): JSX.Element => {
   }, [query.search]);
 
   return (
-    <div className="coins-table">
-      <div className="stats-container">
-        {_get(stats, 'totalCoins') && <div>Total Coins: {stats.totalCoins} </div>}
-        {_get(stats, 'total24hVolume') && (
-          <div>Total 24h Volumne: {Helper.currencyFormatter(Number(stats.total24hVolume))} </div>
-        )}
-        {_get(stats, 'totalExchanges') && <div>Total Exchange: {stats.totalExchanges} </div>}
-        {_get(stats, 'totalMarketCap') && (
-          <div>Total Market Cap: {Helper.currencyFormatter(Number(stats.totalMarketCap))} </div>
-        )}
+    <Layout>
+      <div className="coins-table">
+        <div className="stats-container">
+          {_get(stats, 'totalCoins') && <div>Total Coins: {stats.totalCoins} </div>}
+          {_get(stats, 'total24hVolume') && (
+            <div>Total 24h Volumne: {Helper.currencyFormatter(Number(stats.total24hVolume))} </div>
+          )}
+          {_get(stats, 'totalExchanges') && <div>Total Exchange: {stats.totalExchanges} </div>}
+          {_get(stats, 'totalMarketCap') && (
+            <div>Total Market Cap: {Helper.currencyFormatter(Number(stats.totalMarketCap))} </div>
+          )}
+        </div>
+        <Search
+          allowClear
+          placeholder="Search student"
+          onChange={onChangeSearchKeyWord}
+          value={searchKeyWord || ''}
+          className="search-bar"
+        />
+        <Table
+          loading={false}
+          columns={columns}
+          dataSource={list}
+          scroll={{ x: 1000 }}
+          rowKey={(data) => data.objectId}
+          total={total}
+          pagination={{
+            pageSize: limit,
+            total: total,
+            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total}`,
+            current: Number(page),
+          }}
+        />
       </div>
-      <Search
-        allowClear
-        placeholder="Search student"
-        onChange={onChangeSearchKeyWord}
-        value={searchKeyWord || ''}
-        className="search-bar"
-      />
-      <Table
-        loading={false}
-        columns={columns}
-        dataSource={list}
-        scroll={{ x: 1000 }}
-        rowKey={(data) => data.objectId}
-        total={total}
-        pagination={{
-          pageSize: limit,
-          total: total,
-          showTotal: (total, range) => `${range[0]}-${range[1]} of ${total}`,
-          current: Number(page),
-        }}
-      />
-    </div>
+    </Layout>
   );
 };
 
